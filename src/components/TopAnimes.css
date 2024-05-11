@@ -1,0 +1,21 @@
+/* TopAnimes.css */
+.top-anime-container {
+    overflow: hidden; /* Hide any overflowing content */
+  }
+  
+  .custom-scrollbar {
+    overflow-x: scroll; /* Enable horizontal scrolling */
+    overflow-y: hidden; /* Hide vertical scrollbar */
+    display: flex; /* Ensure children are in a flex container */
+    flex-wrap: nowrap; /* Ensure children are in a single row */
+    -ms-overflow-style: none; /* Hide scrollbar in IE and Edge */
+    scrollbar-width: none; /* Hide scrollbar in Firefox */
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar {
+    display: none; /* Hide scrollbar in Chrome, Safari, and Opera */
+  }
+  
+  .topanimesImg:hover{
+    transform: scale(1.5);
+  }

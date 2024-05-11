@@ -1,0 +1,36 @@
+.anime-image-wrapper {
+    overflow: hidden;
+    border-radius: 12px; /* Increase border radius for a softer look */
+    position: relative; /* Make the container relative to position its child elements */
+  }
+  
+  .subscribe-button {
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black by default */
+    border: none; /* Remove the border */
+    color: white; /* White text */
+    padding: 8px 16px; /* Adjust padding if needed */
+    border-radius: 12px; /* Apply border-radius to match the image */
+    position: absolute; /* Position the button relative to its parent */
+    bottom: 12px; /* Adjust vertical position */
+    left: 50%; /* Align the button horizontally */
+    transform: translateX(-50%); /* Center the button horizontally */
+  }
+  
+  .subscribe-button:hover {
+    background-color: rgba(255, 255, 255, 0.5); /* Lighten the background on hover */
+    color: black; /* Change text color on hover */
+  }
+  
+  .subscribe-button-overlay {
+    background-color: rgba(0, 0, 0, 0); /* Transparent by default */
+    transition: background-color 0.2s ease-in-out;
+    pointer-events: none; /* Prevent clicks on the overlay */
+    border-radius: 12px; /* Match border-radius to the image */
+  }
+  
+  .subscribe-button:hover .subscribe-button-overlay {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black on hover */
+  }
+  
