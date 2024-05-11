@@ -66,7 +66,7 @@ function SearchAnimes() {
               </button>
               
             </div>
-            <div className='mt-3 flex justify-between'>
+            <div className='mt-3 flex justify-between ml-4 mr-4'>
                 <div>
                   <h1 className='sm:text-lg lg:text-xl text-white font-bold'>Duration</h1>
                   <p className='text-gray-200 text-opacity-55'>{anime.duration}</p>
