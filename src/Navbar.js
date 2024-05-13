@@ -47,7 +47,12 @@ let navigate=useNavigate()
         <span className="text-yellow-500">VAULT</span>
       </Link>
     </h1>
+    
     <div className='flex items-center justify-between w-full md:w-auto'>
+      <div className='hidden md:flex'>
+    <h1 className='text-gray-400 text-right pr-8 font-bold hover:text-gray-500 '> <Link to='/'>Home</Link></h1>
+    <h1 className='text-gray-400 text-right pr-8 font-bold hover:text-gray-500'> <Link to='/'>WishList</Link></h1>
+    </div>
       <div className="relative flex">
         <SearchIcon className="absolute text-white pt-2" />
         <form onSubmit={(e)=>{
