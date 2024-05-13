@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { SearchProvider } from './Context/SearchContext';
+import BottomNavbar from './components/BottomNavbar';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,6 +14,7 @@ root.render(
   <SearchProvider>
   <Navbar/>
    <App />
+   <BottomNavbar/>
    <Footer/>
    </SearchProvider>
   </BrowserRouter>

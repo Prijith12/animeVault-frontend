@@ -6,7 +6,7 @@ import TopCharacters from '../components/TopCharacters';
 import Topmangas from '../components/Topmangas';
 import {useNavigate } from 'react-router-dom';
 import { useSearchContext } from '../Context/SearchContext';
-import BottomNavbar from '../components/BottomNavbar';
+
 function Home() {
   const [topAnime, setTopAnime] = useState(null);
   const {updateSearch}=useSearchContext()
@@ -51,7 +51,6 @@ function Home() {
       <TopAnimes/>
       <TopCharacters/>
       <Topmangas/>
-      <BottomNavbar/>
     </div>
   );
 }
