@@ -88,8 +88,8 @@ function BottomNavbar() {
                 </Link>
 
             </div>
-            <div>
-                <Link onClick={wishList}>
+            <div onClick={wishList}>
+                <Link >
                     <FavoriteBorderIcon className='text-gray-400 hover:scale-125' fontSize='small' />
                     <p className='text-gray-400 text-xs'>WishList</p></Link>
 
