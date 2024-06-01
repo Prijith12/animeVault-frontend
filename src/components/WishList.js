@@ -7,6 +7,7 @@ import { IconButton } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { RemoveCircle } from '@mui/icons-material';
 import { removeWishList } from '../services/wishListService';
+import { useSearchContext } from '../Context/SearchContext';
 
 function WishList() {
   const [animes, setAnime] = useState([]);
@@ -14,6 +15,7 @@ function WishList() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [refreshWishlist, setRefreshWishlist] = useState(false);
+  const { isPremium} = useSearchContext(); 
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -58,7 +60,7 @@ function WishList() {
   return (
     <div className='bg-gradient-to-b from-black to-gray-900 min-h-screen '>
       <h1 className='text-white pt-8 font-bold sm:text-base lg:text-lg text-center '>WishList</h1>
-      <div className=" flex-no-wrap overflow-x-auto custom-scrollbar flex justify-center items-center mt-10">
+      <div className=" flex-no-wrap overflow-x-auto custom-scrollbar flex justify-center items-center mt-7">
         {loading ? (
           <Loading />
         ) : (
@@ -75,7 +77,13 @@ function WishList() {
                     className="w-64 h-48 object-cover cursor-pointer hover:scale-110"
                   />
                   <div>
-                 <button className="bg-gray-800 hover:bg-opacity-90  bottom-0 h-10 w-full text-center text-white bg-opacity-25 border border-black rounded-lg focus:outline-none">
+                 <button className="bg-gray-800 hover:bg-opacity-90  bottom-0 h-10 w-full text-center text-white bg-opacity-25 border border-black rounded-lg focus:outline-none" onClick={()=>{
+                  if(!isPremium){
+                    navigate('/premium')
+                  }else{
+                    navigate('/watchEpisodes')
+                  }
+                 }}>
                     Watch Episodes
                   </button>
                   
