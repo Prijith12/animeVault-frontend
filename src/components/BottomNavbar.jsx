@@ -91,26 +91,34 @@ function BottomNavbar() {
                 </Link>
 
             </div>
-            <div onClick={wishList} className='pl-1'>
+            <div onClick={wishList} className='pl-2'>
                 <Link >
                     <FavoriteBorderIcon className='text-gray-400 hover:scale-125' fontSize='small' />
                     <p className='text-gray-400 text-xs'>WishList</p></Link>
 
             </div>
-            <div  onClick={downloads} className='pl-3'>
-                <Link>
-                    <GetAppIcon className='text-gray-400 hover:scale-125' fontSize='small' />
-                    <p className='text-gray-400 text-xs'>Downloads</p>
-                </Link>
-
-            </div>
-            {isAuthenticated && !isPremium ?<div className="border border-yellow-500 rounded-lg overflow-hidden ">
+            <div   className='pl-3'>
+              {
+                isPremium &&
+                <Link to='/downloads'>
+                <GetAppIcon className='text-gray-400 hover:scale-125' fontSize='small' />
+                <p className='text-gray-400 text-xs'>Downloads</p>
+            </Link>
+              }
+                 {!isPremium ?<div className="border border-yellow-500 rounded-lg overflow-hidden ">
       <button className="block text-yellow-500 px-1 py-1 w-full text-center text-xs bg-black hover:bg-gray-900" onClick={()=>{
-        navigate('/premium')
+        if(isAuthenticated){
+          navigate('/premium')
+        }else{
+          loginWithRedirect()
+        }
       }}>
         Premium
       </button>
-    </div>:null} 
+    </div>:null}
+
+            </div>
+          
             <div className='pr-2'>
                 <CustomAccountIcon className='hover:scale-125'user={user} imageUrl={imageUrl}/>
             </div>

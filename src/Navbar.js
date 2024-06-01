@@ -106,6 +106,7 @@ function Navbar() {
           <span className="text-purple-500">ANIME</span>
           <span className="text-yellow-500">VAULT</span>
         </Link>
+        
       </h1>
 
       <div className='flex items-center justify-between w-full md:w-auto'>
@@ -113,15 +114,14 @@ function Navbar() {
           <h1 className='text-gray-400 text-right pr-8 font-bold hover:text-gray-500'><Link to='/'>Home</Link></h1>
           <h1 className='text-gray-400 text-right pr-8 font-bold hover:text-gray-500' onClick={wishList}>WishList</h1>
           {isAuthenticated && !isPremium ? (
-            <div className="border border-yellow-500 rounded-lg overflow-hidden">
+            <div className="border border-yellow-500 rounded-lg overflow-hidden mr-6">
               <button className="block text-yellow-500 px-2 py-1 w-full text-center text-xs bg-black hover:bg-gray-900" onClick={() => navigate('/premium')}>
                 Premium
               </button>
             </div>
           ) : null}
         </div>
-
-        <div className="relative flex pl-8">
+        <div className="relative flex pl-2">
           <SearchIcon className="absolute text-white pt-2" />
           <form onSubmit={handleSubmit}>
             <input
@@ -132,6 +132,7 @@ function Navbar() {
               value={searchAnime}
             />
           </form>
+          
         </div>
 
         {isLoading ? (
@@ -140,6 +141,7 @@ function Navbar() {
           </div>
         ) : isLoggedIn ? (
           <div className="flex items-center pl-9   flex-col ">
+            
               {isPremium && (
                 <div className="flex items-center text-yellow-500 mb-1">
                   <Crown className='text-yellow-600 ' size={13}/> <span className='text-yellow-500 text-xs'>Premium</span>
