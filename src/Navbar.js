@@ -3,10 +3,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Menu, MenuItem } from '@mui/material';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import StarIcon from '@mui/icons-material/Star';
+import { Crown } from 'lucide-react';
 import { LoadingSm } from './components/Loading';
 import { useSearchContext } from './Context/SearchContext';
 import { useAuth0 } from "@auth0/auth0-react";
-import './Navbar.css'
+import axios from 'axios';
+import './Navbar.css';
 
 function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -14,7 +17,7 @@ function Navbar() {
   const [shortName, setShortName] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
   const [searchAnime, setSearchAnime] = useState('');
-  const { updateSearch } = useSearchContext();
+  const { updateSearch, updateIsPremium, isPremium } = useSearchContext();
   const [isLoading, setIsLoading] = useState(false);
 
   let navigate = useNavigate();
@@ -22,22 +25,32 @@ function Navbar() {
 
   useEffect(() => {
     fetchUserData();
-  }, [isAuthenticated]);
+  }, [isAuthenticated, user, isPremium]);
 
   const fetchUserData = async () => {
     try {
       setIsLoading(true);
       if (isAuthenticated) {
-        setUserName(user.name);
-        setShortName(generateShortName(user.name));
-        setIsLoggedIn(true);
-      } else {
-        setIsLoggedIn(false);
-        setUserName(null);
-        setShortName(null);
+        const result = await axios.post(`${process.env.REACT_APP_API_URL}/login`, ({
+          isAuthenticated, user
+        }));
+        if (result.data.success) {
+          setUserName(user.name);
+          setShortName(generateShortName(user.name));
+          if(result.data.premium){
+            updateIsPremium(true)
+          }else{
+            updateIsPremium(false)
+          }
+          setIsLoggedIn(true);
+        } else {
+          setIsLoggedIn(false);
+          setUserName(null);
+          setShortName(null);
+        }
       }
     } catch (err) {
-      console.error("Error fetching user data: ", err);
+      alert("Server is Down");
     } finally {
       setIsLoading(false);
     }
@@ -78,13 +91,13 @@ function Navbar() {
     }
   };
 
-  const wishList=()=>{
-    if(isAuthenticated){
-      navigate('/wishList')
-    }else{
+  const wishList = () => {
+    if (isAuthenticated) {
+      navigate('/wishList');
+    } else {
       loginWithRedirect();
     }
-  }
+  };
 
   return (
     <div className='navbar bg-gradient-to-b from-black to-black flex-wrap flex items-center justify-between p-4 sticky top-0 z-50'>
@@ -97,10 +110,18 @@ function Navbar() {
 
       <div className='flex items-center justify-between w-full md:w-auto'>
         <div className='hidden md:flex '>
-          <h1 className='text-gray-400 text-right pr-8 font-bold hover:text-gray-500'> <Link to='/'>Home</Link></h1>
-          <h1 className='text-gray-400 text-right pr-8 font-bold hover:text-gray-500 text' onClick={wishList}> WishList</h1>
+          <h1 className='text-gray-400 text-right pr-8 font-bold hover:text-gray-500'><Link to='/'>Home</Link></h1>
+          <h1 className='text-gray-400 text-right pr-8 font-bold hover:text-gray-500' onClick={wishList}>WishList</h1>
+          {isAuthenticated && !isPremium ? (
+            <div className="border border-yellow-500 rounded-lg overflow-hidden">
+              <button className="block text-yellow-500 px-2 py-1 w-full text-center text-xs bg-black hover:bg-gray-900" onClick={() => navigate('/premium')}>
+                Premium
+              </button>
+            </div>
+          ) : null}
         </div>
-        <div className="relative flex">
+
+        <div className="relative flex pl-8">
           <SearchIcon className="absolute text-white pt-2" />
           <form onSubmit={handleSubmit}>
             <input
@@ -112,14 +133,24 @@ function Navbar() {
             />
           </form>
         </div>
+
         {isLoading ? (
-          <div className="text-sm text-green-100 ml-2 py-2 px-4">
+          <div className="text-sm text-green-100 ml-2 py-2 ">
             <button className="bg-purple-500 hover:bg-purple-800 text-white font-bold py-2 px-4 rounded-full"><LoadingSm /></button>
           </div>
         ) : isLoggedIn ? (
-          <div className="flex items-center pl-9">
+          <div className="flex items-center pl-9   flex-col ">
+              {isPremium && (
+                <div className="flex items-center text-yellow-500 mb-1">
+                  <Crown className='text-yellow-600 ' size={13}/> <span className='text-yellow-500 text-xs'>Premium</span>
+                </div>
+              )}
+
             <button className="text-sm text-green-100 ml-2 bg-gray-900 hover:bg-gray-700 px-4 py-2 rounded-full " onClick={handleMenuOpen}>
-              <div className="text-gray-200 text-sm mr-4"><p className='md:text-xs lg:text-sm font-bold'><AccountCircleIcon fontSize='small' /> {shortName}</p></div>
+            
+                 <AccountCircleIcon fontSize='small' />
+              <span className='mt-1'>{shortName}</span>
+
             </button>
             <Menu
               anchorEl={anchorEl}

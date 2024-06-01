@@ -6,6 +6,7 @@ import { useSearchContext } from '../Context/SearchContext';
 import Loading from './Loading';
 import '../components/SearchAnimes.css';
 import { useNavigate } from 'react-router-dom';
+import WatchEpisodesButton from './ui/WatchEpisodesButton';
 
 function FetchCharacter() {
   const [anime, setAnime] = useState([]);
@@ -54,9 +55,7 @@ function FetchCharacter() {
                   className="w-96 h-80 object-cover rounded-lg cursor-pointer hover:scale-110"
                 />
               </div>
-              <button className="subscribe-button absolute bottom-0 left-0 w-96  text-center text-white bg-opacity-25 border border-white rounded-lg focus:outline-none">
-                Watch Episodes
-              </button>
+             <WatchEpisodesButton/>
               
             </div>
             <div className='mt-3 text-center'>

@@ -10,6 +10,7 @@ import { useEffect,useState } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import { LoadingSm } from './Loading';
 import { useNavigate } from 'react-router-dom';
+import { useSearchContext } from '../Context/SearchContext';
 function BottomNavbar() {
     const [isMobile, setIsMobile] = useState(false);
     const [prevScrollPos, setPrevScrollPos] = useState(0);
@@ -17,6 +18,7 @@ function BottomNavbar() {
     const [imageUrl,setImageUrl]=useState(null);
     const [Loading,setIsLoading]=useState(false)
     const { loginWithRedirect, logout, user, isAuthenticated, getAccessTokenSilently } = useAuth0();
+    const {isPremium}=useSearchContext();
     const navigate=useNavigate()
 
     useEffect(() => {
@@ -52,8 +54,9 @@ function BottomNavbar() {
         try{
           setIsLoading(true);
           if(isAuthenticated){
+            console.log(user);
             setImageUrl(user.picture)
-            console.log(user.picture);
+            
           }else{
            
            
@@ -88,20 +91,27 @@ function BottomNavbar() {
                 </Link>
 
             </div>
-            <div onClick={wishList}>
+            <div onClick={wishList} className='pl-1'>
                 <Link >
                     <FavoriteBorderIcon className='text-gray-400 hover:scale-125' fontSize='small' />
                     <p className='text-gray-400 text-xs'>WishList</p></Link>
 
             </div>
-            <div  onClick={downloads}>
+            <div  onClick={downloads} className='pl-3'>
                 <Link>
                     <GetAppIcon className='text-gray-400 hover:scale-125' fontSize='small' />
                     <p className='text-gray-400 text-xs'>Downloads</p>
                 </Link>
 
             </div>
-            <div>
+            {isAuthenticated && !isPremium ?<div className="border border-yellow-500 rounded-lg overflow-hidden ">
+      <button className="block text-yellow-500 px-1 py-1 w-full text-center text-xs bg-black hover:bg-gray-900" onClick={()=>{
+        navigate('/premium')
+      }}>
+        Premium
+      </button>
+    </div>:null} 
+            <div className='pr-2'>
                 <CustomAccountIcon className='hover:scale-125'user={user} imageUrl={imageUrl}/>
             </div>
         </div>

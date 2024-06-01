@@ -1,0 +1,7 @@
+.background{
+    @apply bg-gradient-to-b from-black to-gray-900 min-h-screen flex justify-center
+}
+
+.background-premium{
+    @apply bg-gradient-to-b from-black to-gray-900 min-h-screen flex  pt-32 justify-center text-white
+}

@@ -7,7 +7,8 @@ import FetchCharacter from './components/FetchCharacter';
 import TopAnimes from './components/TopAnimes';
 import WishList from './components/WishList';
 import Downloads from './components/Downloads';
-
+import Premium from './components/premium/Premium';
+import Episodes from './components/episodes/Episodes';
 function App() {
   return (
 
@@ -19,6 +20,8 @@ function App() {
       <Route path='/fetchCharacter' element={<FetchCharacter/>}></Route>
       <Route path='/wishList' element={<WishList/>}></Route>
       <Route path='/downloads' element={<Downloads/>}></Route>
+      <Route path='/premium' element={<Premium/>}></Route>
+      <Route path='/watchEpisodes' element={<Episodes/>}></Route>
     </Routes> 
 
   )
