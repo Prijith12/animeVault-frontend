@@ -111,8 +111,8 @@ function Navbar() {
 
       <div className='flex items-center justify-between w-full md:w-auto'>
         <div className='hidden md:flex '>
-          <h1 className='text-gray-400 text-right pr-8 font-bold hover:text-gray-500'><Link to='/'>Home</Link></h1>
-          <h1 className='text-gray-400 text-right pr-8 font-bold hover:text-gray-500' onClick={wishList}>WishList</h1>
+          <h1 className='text-gray-400 text-right pr-8 font-bold hover:text-gray-500 text'><Link to='/'>Home</Link></h1>
+          <h1 className='text-gray-400 text-right pr-8 font-bold hover:text-gray-500 text' onClick={wishList}>WishList</h1>
           {isAuthenticated && !isPremium ? (
             <div className="border border-yellow-500 rounded-lg overflow-hidden mr-6">
               <button className="block text-yellow-500 px-2 py-1 w-full text-center text-xs bg-black hover:bg-gray-900" onClick={() => navigate('/premium')}>
