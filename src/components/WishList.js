@@ -58,7 +58,7 @@ function WishList() {
   return (
     <div className='bg-gradient-to-b from-black to-gray-900 min-h-screen '>
       <h1 className='text-white pt-8 font-bold sm:text-base lg:text-lg text-center '>WishList</h1>
-      <div className=" flex-no-wrap overflow-x-auto custom-scrollbar flex justify-center items-center mt-20">
+      <div className=" flex-no-wrap overflow-x-auto custom-scrollbar flex justify-center items-center mt-10">
         {loading ? (
           <Loading />
         ) : (
