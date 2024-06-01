@@ -6,6 +6,7 @@ import TopCharacters from '../components/TopCharacters';
 import Topmangas from '../components/Topmangas';
 import {useNavigate } from 'react-router-dom';
 import { useSearchContext } from '../Context/SearchContext';
+import axios from 'axios';
 
 function Home() {
   const [topAnime, setTopAnime] = useState(null);
@@ -29,6 +30,18 @@ function Home() {
     updateSearch(459);
     navigate('/fetchAnimes')
   }
+
+  useEffect(()=>{
+    const serverCall=async()=>{
+      try{
+        const respose=await axios.get(`${process.env.REACT_APP_API_URL}`);
+        console.log(respose.data.success);
+      }catch{
+        alert("server is down")
+      }
+    }
+    serverCall()
+  })
 
   return (
     <div className='bg-gradient-to-b from-black to-gray-900 min-h-screen'>
